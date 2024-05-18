@@ -1,4 +1,5 @@
 import { todoDependencies } from ".";
+import { projectsLoad } from "./blank-project-load";
 
 class Project {
   constructor(projectTitle) {
@@ -9,11 +10,13 @@ class Project {
   addTodoItem(todoItem) {
     this.todoItems.push(todoItem);
   }
+  deleteTodoItem(todoItem) {
+    let index = this.todoItems.indexOf(todoItem);
+    this.todoItems.splice(index, 1);
+  }
 
   showTodos() {
-    this.todoItems.forEach((todo) => {
-      console.log(todo);
-    });
+    this.todoItems.forEach((todo) => {});
   }
   getTodos() {
     return this.todoItems;
@@ -23,7 +26,7 @@ class Project {
 function showProjects() {
   console.log(todoDependencies.projects);
 }
-function getProjectTodos(projectName) {
+function getProject(projectName) {
   let project = todoDependencies.projects.find(
     (project) => project.projectTitle == projectName
   );
@@ -34,4 +37,4 @@ function createProject(name) {
   todoDependencies.projects.push(new Project(name));
 }
 
-export { Project, createProject, showProjects, getProjectTodos };
+export { Project, createProject, showProjects, getProject };

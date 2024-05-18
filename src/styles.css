@@ -24,6 +24,7 @@ ul {
 }
 .user {
   text-align: center;
+  color: white;
 }
 .projects-container {
   display: flex;
@@ -106,6 +107,7 @@ ul li {
   flex-direction: column;
   align-items: center;
   gap: 3em;
+  background: linear-gradient(90deg, #0f6dba, #141413);
 }
 .todos {
   width: 100%;
@@ -131,6 +133,16 @@ ul li {
 .delete-todo-btn {
   background-color: red;
 }
+.delete-todo-btn:hover {
+  background-color: rgb(232, 95, 95);
+}
 .done-todo-btn {
   background-color: green;
+}
+.done-todo-btn:hover {
+  background-color: rgb(9, 214, 9);
+}
+.header {
+  color: white;
+  margin-top: 1em;
 }
