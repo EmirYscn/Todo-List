@@ -15,20 +15,23 @@ class Project {
       console.log(todo);
     });
   }
+  getTodos() {
+    return this.todoItems;
+  }
 }
 
 function showProjects() {
   console.log(todoDependencies.projects);
 }
-function showProjectTodos(projectName) {
+function getProjectTodos(projectName) {
   let project = todoDependencies.projects.find(
     (project) => project.projectTitle == projectName
   );
-  project.showTodos();
+  return project;
 }
 
 function createProject(name) {
   todoDependencies.projects.push(new Project(name));
 }
 
-export { Project, createProject, showProjects, showProjectTodos };
+export { Project, createProject, showProjects, getProjectTodos };

@@ -1,9 +1,12 @@
-function blankProjectLoad() {
-  let projectsArray = [];
-  let projectTitle = "Default Project";
-  projectsArray.push({ projectTitle });
+import { projectsDivSetup } from "./dom-manip";
 
-  return { projectsArray, projectTitle };
+function projectsLoad() {
+  const projectsDiv = document.querySelector(".projects-container");
+  projectsDiv.innerHTML = "";
+  const heading = document.createElement("h2");
+  heading.textContent = "My list";
+  projectsDiv.appendChild(heading);
+  projectsDivSetup();
 }
 
-export { blankProjectLoad };
+export { projectsLoad };
