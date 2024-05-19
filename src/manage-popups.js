@@ -7,9 +7,9 @@ import { todoDependencies } from ".";
 
 const projectPopupElements = {
   createBtn: document.querySelector(".create-project-btn"),
-  closeBtn: document.querySelector(".popup .close-btn"),
+  closeBtn: document.querySelector(".create-project-popup .close-btn"),
   doneBtn: document.querySelector("#done-btn"),
-  popup: document.querySelector(".popup"),
+  popup: document.querySelector(".create-project-popup"),
   projectNameInput: document.querySelector("#project-name"),
 };
 
@@ -17,16 +17,21 @@ function togglePopup(popup, action) {
   popup.classList[action]("active");
 }
 
+function resetProjectForm() {
+  projectPopupElements.projectNameInput.value = "";
+}
+
 function manageProjectPopup() {
-  projectPopupElements.createBtn.addEventListener("click", () =>
-    togglePopup(projectPopupElements.popup, "add")
-  );
+  projectPopupElements.createBtn.addEventListener("click", () => {
+    resetProjectForm();
+    togglePopup(projectPopupElements.popup, "add");
+  });
   projectPopupElements.closeBtn.addEventListener("click", () =>
     togglePopup(projectPopupElements.popup, "remove")
   );
   projectPopupElements.doneBtn.addEventListener("click", () => {
     const projectName = projectPopupElements.projectNameInput.value;
-    if (!checkProject(projectName)) {
+    if (projectName !== "" && !checkProject(projectName)) {
       createProject(projectName);
       todoDependencies.setCurrentProject(projectName);
       projectsLoad(todoDependencies.getCurrentProject());
@@ -39,9 +44,9 @@ function manageProjectPopup() {
 
 const todoPopupElements = {
   createBtn: document.querySelector("#create-todo-btn"),
-  closeBtn: document.querySelector(".popup-2 .close-btn"),
+  closeBtn: document.querySelector(".create-todo-popup .close-btn"),
   doneBtn: document.querySelector("#todo-done-btn"),
-  popup: document.querySelector(".popup-2"),
+  popup: document.querySelector(".create-todo-popup"),
   nameInput: document.querySelector("#todo-name"),
   descriptionInput: document.querySelector("#todo-description"),
   dueDateInput: document.querySelector("#due-date"),

@@ -7,7 +7,7 @@ function projectsLoad(projectName = "Default") {
   projectsDiv.innerHTML = "";
 
   const heading = document.createElement("h2");
-  heading.textContent = "My list";
+  heading.textContent = "Projects";
   projectsDiv.appendChild(heading);
 
   renderProjectTodos(projectName);
@@ -63,17 +63,6 @@ function renderProjectTodos(projectName = "Default") {
     const dueDateSpan = createSpan(todo.dueDate);
     const prioritySpan = createSpan(todo.priority);
 
-    // const deleteButton = document.createElement("button");
-    // deleteButton.classList.add("todo-btn", "delete-todo-btn");
-    // const doneButton = document.createElement("button");
-    // doneButton.classList.add("todo-btn", "done-todo-btn");
-    // const titleSpan = document.createElement("span");
-    // titleSpan.textContent = todo.title;
-    // const dueDateSpan = document.createElement("span");
-    // dueDateSpan.textContent = todo.dueDate;
-    // const prioritySpan = document.createElement("span");
-    // prioritySpan.textContent = todo.priority;
-
     todoDiv.append(
       deleteButton,
       doneButton,
@@ -82,12 +71,6 @@ function renderProjectTodos(projectName = "Default") {
       prioritySpan
     );
     todosDiv.appendChild(todoDiv);
-
-    // div.appendChild(deleteButton);
-    // div.appendChild(doneButton);
-    // div.appendChild(titleSpan);
-    // div.appendChild(dueDateSpan);
-    // div.appendChild(prioritySpan);
 
     deleteButton.addEventListener("click", () => {
       project.deleteTodoItem(todo);

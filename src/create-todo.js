@@ -16,7 +16,7 @@ function createTodo(
   priority,
   projectToInsert = ""
 ) {
-  let todo = new Todo(title, description, dueDate, priority);
+  const todo = new Todo(title, description, dueDate, priority);
   if (projectToInsert === "") {
     todoDependencies.defaultProject.addTodoItem(todo);
   }
@@ -33,7 +33,7 @@ function createTodo2({
   priority,
   projectToInsert,
 }) {
-  let todo = new Todo(title, description, dueDate, priority, projectToInsert);
+  const todo = new Todo(title, description, dueDate, priority, projectToInsert);
   if (projectToInsert === "") {
     todoDependencies.defaultProject.addTodoItem(todo);
   }
