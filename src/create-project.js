@@ -13,18 +13,11 @@ class Project {
     let index = this.todoItems.indexOf(todoItem);
     this.todoItems.splice(index, 1);
   }
-
-  showTodos() {
-    console.log(this.todoItems);
-  }
   getTodos() {
     return this.todoItems;
   }
 }
 
-function showProjects() {
-  console.log(todoDependencies.projects);
-}
 function getProject(projectName) {
   let project = todoDependencies.projects.find(
     (project) => project.projectTitle == projectName
@@ -32,8 +25,14 @@ function getProject(projectName) {
   return project;
 }
 
+function checkProject(projectName) {
+  return todoDependencies.projects.some(
+    (project) => project.projectTitle === projectName
+  );
+}
+
 function createProject(name) {
   todoDependencies.projects.push(new Project(name));
 }
 
-export { Project, createProject, showProjects, getProject };
+export { Project, createProject, getProject, checkProject };

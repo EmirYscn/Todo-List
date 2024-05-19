@@ -1,11 +1,6 @@
 import { createTodo, createTodo2 } from "./create-todo";
-import {
-  Project,
-  createProject,
-  showProjects,
-  getProjectTodos,
-} from "./create-project";
-import { ProjectsLoad } from "./blank-project-load";
+import { Project, createProject } from "./create-project";
+import { initializeDom } from "./initial-projects-load";
 import "./styles.css";
 
 let todoDependencies = (function () {
@@ -59,6 +54,7 @@ createTodo2({
   priority: "high",
   projectToInsert: "Grocery",
 });
-ProjectsLoad();
-showProjects();
+
+initializeDom();
+
 export { todoDependencies };
