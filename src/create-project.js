@@ -1,5 +1,4 @@
 import { todoDependencies } from ".";
-import { projectsLoad } from "./blank-project-load";
 
 class Project {
   constructor(projectTitle) {
@@ -16,7 +15,7 @@ class Project {
   }
 
   showTodos() {
-    this.todoItems.forEach((todo) => {});
+    console.log(this.todoItems);
   }
   getTodos() {
     return this.todoItems;

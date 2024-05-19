@@ -6,6 +6,49 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="popup">
+      <div class="close-btn">&times;</div>
+      <div class="form">
+        <h2>Add Project</h2>
+        <div class="form-element">
+          <label for="project-name">Project Name:</label>
+          <input type="text" name="project_name" id="project-name" />
+        </div>
+        <div class="form-element">
+          <button id="done-btn">Done</button>
+        </div>
+      </div>
+    </div>
+    <div class="popup-2">
+      <div class="close-btn">&times;</div>
+      <div class="form">
+        <h2>Add Todo</h2>
+        <div class="form-element">
+          <label for="todo-name">Todo:</label>
+          <input type="text" name="todo_name" id="todo-name" />
+        </div>
+        <div class="form-element">
+          <label for="todo-description">Description:</label>
+          <input type="text" name="todo_description" id="todo-description" />
+        </div>
+        <div class="form-element">
+          <label for="due-date">Due Date:</label>
+          <input type="date" name="due_date" id="due-date" />
+        </div>
+        <div class="form-element">
+          <label for="todo-description">Priority:</label>
+          <select name="priority" id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="form-element">
+          <button id="todo-done-btn">Done</button>
+        </div>
+      </div>
+    </div>
+
     <div class="content">
       <div class="sidebar">
         <div class="user">
@@ -49,6 +92,7 @@
             <span>Low</span>
           </div> -->
         </div>
+        <button class="create-todo-btn" id="create-todo-btn">+</button>
       </div>
     </div>
   </body>

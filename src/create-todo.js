@@ -26,5 +26,22 @@ function createTodo(
     }
   });
 }
+function createTodo2({
+  title,
+  description,
+  dueDate,
+  priority,
+  projectToInsert,
+}) {
+  let todo = new Todo(title, description, dueDate, priority, projectToInsert);
+  if (projectToInsert === "") {
+    todoDependencies.defaultProject.addTodoItem(todo);
+  }
+  todoDependencies.projects.forEach((currentProject) => {
+    if (currentProject.projectTitle === projectToInsert) {
+      currentProject.addTodoItem(todo);
+    }
+  });
+}
 
-export { Todo, createTodo };
+export { Todo, createTodo, createTodo2 };
