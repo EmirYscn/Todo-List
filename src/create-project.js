@@ -34,5 +34,14 @@ function checkProject(projectName) {
 function createProject(name) {
   todoDependencies.projects.push(new Project(name));
 }
+function deleteProject(projectName) {
+  let project = todoDependencies.projects.find(
+    (project) => project.projectTitle == projectName
+  );
+  let projectIndex = todoDependencies.projects.findIndex(
+    (x) => x.projectTitle === project.projectTitle
+  );
+  todoDependencies.projects.splice(projectIndex, 1);
+}
 
-export { Project, createProject, getProject, checkProject };
+export { Project, createProject, getProject, checkProject, deleteProject };

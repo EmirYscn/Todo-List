@@ -1,6 +1,5 @@
 import { todoDependencies } from ".";
-import { getProject, createProject } from "./create-project";
-import { manageProjectPopup, manageTodoPopup } from "./manage-popups";
+import { getProject, deleteProject } from "./create-project";
 
 function projectsLoad(projectName = "Default") {
   const projectsDiv = document.querySelector(".projects-container");
@@ -17,6 +16,7 @@ function projectsLoad(projectName = "Default") {
 function renderProjects() {
   // create unordered list for project names
   const projectsDiv = document.querySelector(".projects-container");
+  projectsDiv.innerHTML = "";
   const ul = document.createElement("ul");
   projectsDiv.appendChild(ul);
 
@@ -24,7 +24,9 @@ function renderProjects() {
   todoDependencies.projects.forEach((project) => {
     const projectName = project.projectTitle;
     const listItem = document.createElement("li");
+    const deleteButton = createButton();
     listItem.textContent = projectName;
+    listItem.appendChild(deleteButton);
     ul.appendChild(listItem);
 
     listItem.addEventListener("click", () => {
@@ -32,6 +34,12 @@ function renderProjects() {
       todoDependencies.setCurrentProject(projectName);
       changeProjectHeader(projectName);
       renderProjectTodos(projectName);
+    });
+    deleteButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteProject(projectName);
+      renderProjects();
+      renderProjectTodos(todoDependencies.projects[0].projectTitle);
     });
   });
 }
@@ -42,8 +50,8 @@ function changeProjectHeader(projectTitle) {
 }
 
 function renderProjectTodos(projectName = "Default") {
-  // get the specifed project object
   const project = getProject(projectName);
+
   // get the project object's todo array
   const projectTodos = project.getTodos();
 
@@ -81,7 +89,9 @@ function renderProjectTodos(projectName = "Default") {
 
 function createButton(classes) {
   const button = document.createElement("button");
-  button.className = classes;
+  if (classes) {
+    button.className = classes;
+  }
   return button;
 }
 
