@@ -1,5 +1,6 @@
 import { todoDependencies } from ".";
 import { getProject, deleteProject } from "./create-project";
+import { setDarkMode, setLightMode, getDarkModeState } from "./darkmode";
 
 function projectsLoad(projectName = "Default") {
   const projectsDiv = document.querySelector(".projects-container");
@@ -64,7 +65,7 @@ function renderProjectTodos(projectName = "Default") {
   projectTodos.forEach((todo) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
-    if (darkmodeToggleButton.checked) todoDiv.classList.add("darkmode");
+    if (getDarkModeState()) todoDiv.classList.add("darkmode");
 
     const deleteButton = createButton("todo-btn delete-todo-btn");
     const doneButton = createButton("todo-btn done-todo-btn");
@@ -104,21 +105,12 @@ function createSpan(text) {
 
 const darkmodeToggleButton = document.querySelector("#darkmode-toggle");
 darkmodeToggleButton.addEventListener("click", () => {
-  const body = document.querySelector("body");
-  const main = document.querySelector(".main");
-  const todos = document.querySelectorAll(".todo");
   if (darkmodeToggleButton.checked) {
-    body.classList.add("darkmode");
-    main.classList.add("darkmode");
-    todos.forEach((todo) => {
-      todo.classList.add("darkmode");
-    });
+    setDarkMode();
+    renderProjectTodos();
   } else {
-    body.classList.remove("darkmode");
-    main.classList.remove("darkmode");
-    todos.forEach((todo) => {
-      todo.classList.remove("darkmode");
-    });
+    setLightMode();
+    renderProjectTodos();
   }
 });
 export { renderProjects, renderProjectTodos, projectsLoad };
