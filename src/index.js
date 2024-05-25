@@ -22,11 +22,11 @@ let todoDependencies = (function () {
   };
 })();
 
-// create Today project
+// Seperate this 'Due By' type from normal projects in html css!!!
 createProject("Today");
-// add todos to "Today Project" if new Date() === todo.dueDate
-
-// initialDomSetup();
+createProject("Tomorrow");
+createProject("This Week");
+createProject("Next Week");
 
 // create project
 createProject("Grocery");

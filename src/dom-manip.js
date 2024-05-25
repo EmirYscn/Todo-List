@@ -1,6 +1,7 @@
 import { todoDependencies } from ".";
 import { getProject, deleteProject } from "./create-project";
 import { setDarkMode, setLightMode, getDarkModeState } from "./darkmode";
+import { format } from "date-fns";
 
 function projectsLoad(projectName = "Default") {
   const projectsDiv = document.querySelector(".projects-container");
@@ -70,7 +71,7 @@ function renderProjectTodos(projectName = "Default") {
     const deleteButton = createButton("todo-btn delete-todo-btn");
     const doneButton = createButton("todo-btn done-todo-btn");
     const titleSpan = createSpan(todo.title);
-    const dueDateSpan = createSpan(todo.dueDate);
+    const dueDateSpan = createSpan(format(todo.dueDate, "dd/MM/yyyy"));
     const prioritySpan = createSpan(todo.priority);
 
     todoDiv.append(
@@ -83,7 +84,15 @@ function renderProjectTodos(projectName = "Default") {
     todosDiv.appendChild(todoDiv);
 
     deleteButton.addEventListener("click", () => {
+      // delete todo from current project
       project.deleteTodoItem(todo);
+      // delete todo if it is also in other projects
+      todoDependencies.projects.forEach((currentProject) => {
+        const projectTodos = currentProject.getTodos();
+        if (projectTodos.includes(todo)) {
+          currentProject.deleteTodoItem(todo);
+        }
+      });
       renderProjectTodos(projectName);
     });
   });
