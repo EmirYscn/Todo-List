@@ -2,6 +2,7 @@ import { createProject, checkProject } from "./create-project";
 import { createTodo } from "./create-todo";
 import { renderProjectTodos, projectsLoad } from "./dom-manip";
 import { todoDependencies } from ".";
+import { format } from "date-fns";
 
 // Create Project Popup
 
@@ -72,14 +73,21 @@ function manageTodoPopup() {
     const todoDetails = {
       name: todoPopupElements.nameInput.value,
       description: todoPopupElements.descriptionInput.value,
-      dueDate: todoPopupElements.dueDateInput.value,
+      dueDate: new Date(todoPopupElements.dueDateInput.value),
       priority: todoPopupElements.priorityInput.value,
     };
 
     createTodo(
       todoDetails.name,
       todoDetails.description,
-      todoDetails.dueDate,
+      format(
+        new Date(
+          todoDetails.dueDate.getFullYear(),
+          todoDetails.dueDate.getMonth(),
+          todoDetails.dueDate.getDate()
+        ),
+        "yyyy/MM/dd"
+      ),
       todoDetails.priority,
       todoDependencies.getCurrentProject()
     );

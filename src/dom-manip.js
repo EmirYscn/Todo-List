@@ -107,10 +107,10 @@ const darkmodeToggleButton = document.querySelector("#darkmode-toggle");
 darkmodeToggleButton.addEventListener("click", () => {
   if (darkmodeToggleButton.checked) {
     setDarkMode();
-    renderProjectTodos();
+    renderProjectTodos(todoDependencies.getCurrentProject());
   } else {
     setLightMode();
-    renderProjectTodos();
+    renderProjectTodos(todoDependencies.getCurrentProject());
   }
 });
 export { renderProjects, renderProjectTodos, projectsLoad };

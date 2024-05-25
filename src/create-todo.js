@@ -1,10 +1,12 @@
 import { todoDependencies } from ".";
+import { format } from "date-fns";
 
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = format(new Date(dueDate), "dd/MM/yyyy");
+    // this.dueDate = dueDate;
     this.priority = priority;
   }
 }

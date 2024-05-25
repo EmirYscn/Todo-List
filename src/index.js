@@ -22,6 +22,10 @@ let todoDependencies = (function () {
   };
 })();
 
+// create Today project
+createProject("Today");
+// add todos to "Today Project" if new Date() === todo.dueDate
+
 // initialDomSetup();
 
 // create project
