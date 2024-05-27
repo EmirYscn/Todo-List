@@ -1,6 +1,11 @@
-import { createTodo, createTodo2 } from "./create-todo";
+import { createTodo } from "./create-todo";
 import { Project, createProject } from "./create-project";
 import { initializeDom } from "./initial-projects-load";
+import {
+  getLocalStorage,
+  updateDarkModeLocalStorage,
+} from "./manage-localstorage";
+import { setDarkModeState } from "./darkmode";
 import "./styles.css";
 
 let todoDependencies = (function () {
@@ -22,42 +27,37 @@ let todoDependencies = (function () {
   };
 })();
 
-// Seperate this 'Due By' type from normal projects in html css!!!
-createProject("Today");
-createProject("Tomorrow");
-createProject("This Week");
-createProject("Next Week");
+if (localStorage.getItem("projects")) {
+  todoDependencies.projects = getLocalStorage();
+} else {
+  // Seperate this 'Due By' type from normal projects in html css!!!
+  createProject("Today");
+  createProject("Tomorrow");
+  createProject("This Week");
+  createProject("Next Week");
 
-// create project
-createProject("Grocery");
-// create project
-createProject("School");
+  // create project
+  createProject("Grocery");
+  // create project
+  createProject("School");
 
-// create todo -> added to default project
-createTodo("Juice", "Need juice", "5/20/2024", "low");
+  // create todo -> added to default project
+  createTodo("Juice", "Need juice", "5/20/2024", "low");
 
-// create todo -> added to Grocery project
-createTodo("Fruits", "buy fruits", "5/22/2024", "low", "Grocery");
+  // create todo -> added to Grocery project
+  createTodo("Fruits", "buy fruits", "5/22/2024", "low", "Grocery");
 
-// create todo -> added to default project
-createTodo("Food", "need food", "5/23/2024", "high");
-createTodo("Food2", "need food", "5/23/2024", "high");
-createTodo("Food3", "need food", "5/23/2024", "high");
+  // create todo -> added to default project
+  createTodo("Food", "need food", "5/23/2024", "high");
+  createTodo("Food2", "need food", "5/23/2024", "high");
+  createTodo("Food3", "need food", "5/23/2024", "high");
+}
 
-createTodo2({
-  title: "Food4",
-  description: "need food",
-  dueDate: "5/23/2024",
-  priority: "high",
-  projectToInsert: "",
-});
-createTodo2({
-  title: "Food5",
-  description: "need food",
-  dueDate: "5/23/2024",
-  priority: "high",
-  projectToInsert: "Grocery",
-});
+if (localStorage.getItem("darkmode")) {
+  setDarkModeState();
+} else {
+  updateDarkModeLocalStorage();
+}
 
 initializeDom();
 

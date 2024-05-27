@@ -1,4 +1,5 @@
 import { todoDependencies } from ".";
+import { updateProjectsLocalStorage } from "./manage-localstorage";
 
 class Project {
   constructor(projectTitle) {
@@ -33,6 +34,7 @@ function checkProject(projectName) {
 
 function createProject(name) {
   todoDependencies.projects.push(new Project(name));
+  updateProjectsLocalStorage();
 }
 function deleteProject(projectName) {
   let project = todoDependencies.projects.find(
@@ -42,6 +44,7 @@ function deleteProject(projectName) {
     (x) => x.projectTitle === project.projectTitle
   );
   todoDependencies.projects.splice(projectIndex, 1);
+  updateProjectsLocalStorage();
 }
 
 export { Project, createProject, getProject, checkProject, deleteProject };

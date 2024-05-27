@@ -9,6 +9,7 @@ import {
   isSameDay,
 } from "date-fns";
 import { getProject } from "./create-project";
+import { updateProjectsLocalStorage } from "./manage-localstorage";
 
 class Todo {
   constructor(title, description, dueDate, priority) {
@@ -29,8 +30,7 @@ function createTodo(
 ) {
   const todo = new Todo(title, description, dueDate, priority);
   const dueDateFormatted = format(todo.dueDate, "dd/MM/yyyy");
-  // console.log(todo.dueDate);
-  // console.log(format(todo.dueDate, "dd/MM/yyyy"));
+
   if (projectToInsert === "") {
     todoDependencies.defaultProject.addTodoItem(todo);
   }
@@ -67,6 +67,7 @@ function createTodo(
     // add to "next week" project
     getProject("Next Week").addTodoItem(todo);
   }
+  updateProjectsLocalStorage();
 }
 
 function isInSameWeek(todoDueDate, week) {
@@ -75,22 +76,4 @@ function isInSameWeek(todoDueDate, week) {
   });
 }
 
-function createTodo2({
-  title,
-  description,
-  dueDate,
-  priority,
-  projectToInsert,
-}) {
-  const todo = new Todo(title, description, dueDate, priority, projectToInsert);
-  if (projectToInsert === "") {
-    todoDependencies.defaultProject.addTodoItem(todo);
-  }
-  todoDependencies.projects.forEach((currentProject) => {
-    if (currentProject.projectTitle === projectToInsert) {
-      currentProject.addTodoItem(todo);
-    }
-  });
-}
-
-export { Todo, createTodo, createTodo2 };
+export { Todo, createTodo };

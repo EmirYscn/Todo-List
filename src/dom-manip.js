@@ -2,6 +2,7 @@ import { todoDependencies } from ".";
 import { getProject, deleteProject } from "./create-project";
 import { setDarkMode, setLightMode, getDarkModeState } from "./darkmode";
 import { format } from "date-fns";
+import { updateProjectsLocalStorage } from "./manage-localstorage";
 
 function projectsLoad(projectName = "Default") {
   const projectsDiv = document.querySelector(".projects-container");
@@ -93,6 +94,7 @@ function renderProjectTodos(projectName = "Default") {
           currentProject.deleteTodoItem(todo);
         }
       });
+      updateProjectsLocalStorage();
       renderProjectTodos(projectName);
     });
   });
