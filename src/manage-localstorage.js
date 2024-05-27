@@ -25,8 +25,17 @@ function getLocalStorage() {
   return projects_deserialized;
 }
 
+function updateCurrentProjectLocalStorage() {
+  localStorage.setItem("currentProject", todoDependencies.getCurrentProject());
+}
+function getCurrentProjectLocalStorage() {
+  return localStorage.getItem("currentProject");
+}
+
 export {
   updateDarkModeLocalStorage,
   updateProjectsLocalStorage,
+  updateCurrentProjectLocalStorage,
+  getCurrentProjectLocalStorage,
   getLocalStorage,
 };

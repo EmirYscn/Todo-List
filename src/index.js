@@ -2,7 +2,9 @@ import { createTodo } from "./create-todo";
 import { Project, createProject } from "./create-project";
 import { initializeDom } from "./initial-projects-load";
 import {
+  getCurrentProjectLocalStorage,
   getLocalStorage,
+  updateCurrentProjectLocalStorage,
   updateDarkModeLocalStorage,
 } from "./manage-localstorage";
 import { setDarkModeState } from "./darkmode";
@@ -57,6 +59,12 @@ if (localStorage.getItem("darkmode")) {
   setDarkModeState();
 } else {
   updateDarkModeLocalStorage();
+}
+
+if (localStorage.getItem("currentProject")) {
+  todoDependencies.setCurrentProject(getCurrentProjectLocalStorage());
+} else {
+  updateCurrentProjectLocalStorage();
 }
 
 initializeDom();

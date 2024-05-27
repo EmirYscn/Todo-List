@@ -310,3 +310,9 @@ body.darkmode {
   background-color: #262525;
   color: white;
 }
+.strike {
+  text-decoration: line-through;
+}
+.disable {
+  display: none;
+}

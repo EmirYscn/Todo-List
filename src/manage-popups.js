@@ -3,6 +3,7 @@ import { createTodo } from "./create-todo";
 import { renderProjectTodos, projectsLoad } from "./dom-manip";
 import { todoDependencies } from ".";
 import { format } from "date-fns";
+import { updateCurrentProjectLocalStorage } from "./manage-localstorage";
 
 // Create Project Popup
 
@@ -36,6 +37,7 @@ function manageProjectPopup() {
       createProject(projectName);
       todoDependencies.setCurrentProject(projectName);
       projectsLoad(todoDependencies.getCurrentProject());
+      updateCurrentProjectLocalStorage();
     }
     togglePopup(projectPopupElements.popup, "remove");
   });

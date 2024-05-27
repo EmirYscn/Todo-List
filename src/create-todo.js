@@ -1,23 +1,15 @@
 import { todoDependencies } from ".";
-import {
-  format,
-  addDays,
-  addWeeks,
-  endOfWeek,
-  startOfWeek,
-  isSameWeek,
-  isSameDay,
-} from "date-fns";
+import { addDays, addWeeks, endOfWeek, isSameWeek, isSameDay } from "date-fns";
 import { getProject } from "./create-project";
 import { updateProjectsLocalStorage } from "./manage-localstorage";
 
 class Todo {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, done = false) {
     this.title = title;
     this.description = description;
-    // this.dueDate = format(new Date(dueDate), "dd/MM/yyyy");
     this.dueDate = new Date(dueDate);
     this.priority = priority;
+    this.done = done;
   }
 }
 
@@ -26,10 +18,10 @@ function createTodo(
   description,
   dueDate,
   priority,
-  projectToInsert = ""
+  projectToInsert = "",
+  done
 ) {
-  const todo = new Todo(title, description, dueDate, priority);
-  const dueDateFormatted = format(todo.dueDate, "dd/MM/yyyy");
+  const todo = new Todo(title, description, dueDate, priority, done);
 
   if (projectToInsert === "") {
     todoDependencies.defaultProject.addTodoItem(todo);

@@ -2,9 +2,12 @@ import { todoDependencies } from ".";
 import { getProject, deleteProject } from "./create-project";
 import { setDarkMode, setLightMode, getDarkModeState } from "./darkmode";
 import { format } from "date-fns";
-import { updateProjectsLocalStorage } from "./manage-localstorage";
+import {
+  updateCurrentProjectLocalStorage,
+  updateProjectsLocalStorage,
+} from "./manage-localstorage";
 
-function projectsLoad(projectName = "Default") {
+function projectsLoad() {
   const projectsDiv = document.querySelector(".projects-container");
   projectsDiv.innerHTML = "";
 
@@ -12,8 +15,8 @@ function projectsLoad(projectName = "Default") {
   heading.textContent = "Projects";
   projectsDiv.appendChild(heading);
 
-  renderProjectTodos(projectName);
   renderProjects();
+  renderProjectTodos(todoDependencies.getCurrentProject());
 }
 
 function renderProjects() {
@@ -29,20 +32,33 @@ function renderProjects() {
     const listItem = document.createElement("li");
     const deleteButton = createButton();
     listItem.textContent = projectName;
-    listItem.appendChild(deleteButton);
+    if (
+      projectName === "Today" ||
+      projectName === "Tomorrow" ||
+      projectName === "This Week" ||
+      projectName === "Next Week"
+    ) {
+      console.log("aha");
+    } else {
+      listItem.appendChild(deleteButton);
+    }
     ul.appendChild(listItem);
 
     listItem.addEventListener("click", () => {
       // when clicked show the project's todos and change the current project to that project
       todoDependencies.setCurrentProject(projectName);
+      updateCurrentProjectLocalStorage();
       changeProjectHeader(projectName);
       renderProjectTodos(projectName);
     });
     deleteButton.addEventListener("click", (e) => {
       e.stopPropagation();
       deleteProject(projectName);
-      renderProjects();
-      renderProjectTodos(todoDependencies.projects[0].projectTitle);
+      todoDependencies.setCurrentProject(
+        todoDependencies.projects[0].projectTitle
+      );
+      projectsLoad();
+      updateCurrentProjectLocalStorage();
     });
   });
 }
@@ -54,7 +70,17 @@ function changeProjectHeader(projectTitle) {
 
 function renderProjectTodos(projectName = "Default") {
   const project = getProject(projectName);
-
+  const createTodoBtn = document.querySelector("#create-todo-btn");
+  if (
+    projectName === "Today" ||
+    projectName === "Tomorrow" ||
+    projectName === "This Week" ||
+    projectName === "Next Week"
+  ) {
+    createTodoBtn.classList.add("disable");
+  } else {
+    createTodoBtn.classList.remove("disable");
+  }
   // get the project object's todo array
   const projectTodos = project.getTodos();
 
@@ -72,6 +98,7 @@ function renderProjectTodos(projectName = "Default") {
     const deleteButton = createButton("todo-btn delete-todo-btn");
     const doneButton = createButton("todo-btn done-todo-btn");
     const titleSpan = createSpan(todo.title);
+    if (todo.done) titleSpan.classList.add("strike");
     const dueDateSpan = createSpan(format(todo.dueDate, "dd/MM/yyyy"));
     const prioritySpan = createSpan(todo.priority);
 
@@ -94,6 +121,11 @@ function renderProjectTodos(projectName = "Default") {
           currentProject.deleteTodoItem(todo);
         }
       });
+      updateProjectsLocalStorage();
+      renderProjectTodos(projectName);
+    });
+    doneButton.addEventListener("click", () => {
+      todo.done === false ? (todo.done = true) : (todo.done = false);
       updateProjectsLocalStorage();
       renderProjectTodos(projectName);
     });
