@@ -45,6 +45,9 @@ body {
 }
 
 .projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   width: 100%;
 }
 
@@ -315,4 +318,37 @@ body.darkmode {
 }
 .disable {
   display: none;
+}
+
+.due-by-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.due-by-container h4 {
+  grid-column: span 2;
+}
+
+.due-by-container ul {
+  list-style-type: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 3px;
+  column-gap: 10px;
+}
+
+.due-by-container li {
+  padding: 10px;
+  margin: 4px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+}
+.due-by-container li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }

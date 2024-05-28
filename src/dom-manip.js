@@ -22,9 +22,17 @@ function projectsLoad() {
 function renderProjects() {
   // create unordered list for project names
   const projectsDiv = document.querySelector(".projects-container");
+  const dueByProjectsDiv = document.querySelector(".due-by-container");
+  dueByProjectsDiv.innerHTML = "";
   projectsDiv.innerHTML = "";
-  const ul = document.createElement("ul");
-  projectsDiv.appendChild(ul);
+  const headerProjects = document.createElement("h4");
+  const headerDueBy = document.createElement("h4");
+  headerProjects.textContent = "Projects";
+  headerDueBy.textContent = "Due by";
+  projectsDiv.appendChild(headerProjects);
+  dueByProjectsDiv.appendChild(headerDueBy);
+  const ulProjects = document.createElement("ul");
+  const ulDueBy = document.createElement("ul");
 
   // for each project create list element and add event listener
   todoDependencies.projects.forEach((project) => {
@@ -38,11 +46,13 @@ function renderProjects() {
       projectName === "This Week" ||
       projectName === "Next Week"
     ) {
-      console.log("aha");
+      dueByProjectsDiv.appendChild(ulDueBy);
+      ulDueBy.appendChild(listItem);
     } else {
+      projectsDiv.appendChild(ulProjects);
       listItem.appendChild(deleteButton);
+      ulProjects.appendChild(listItem);
     }
-    ul.appendChild(listItem);
 
     listItem.addEventListener("click", () => {
       // when clicked show the project's todos and change the current project to that project
