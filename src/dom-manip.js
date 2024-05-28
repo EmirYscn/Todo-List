@@ -112,12 +112,12 @@ function renderProjectTodos(projectName = "Default") {
     const dueDateSpan = createSpan(format(todo.dueDate, "dd/MM/yyyy"));
     let prioritySpan;
 
-    if (todo.priority === "low") {
-      prioritySpan = createSpan("❗️");
+    if (todo.priority === "high") {
+      prioritySpan = createSpan("❗️❗️❗️");
     } else if (todo.priority === "medium") {
       prioritySpan = createSpan("❗️❗️");
     } else {
-      prioritySpan = createSpan("❗️❗️❗️");
+      prioritySpan = createSpan("❗️");
     }
 
     todoDiv.append(
