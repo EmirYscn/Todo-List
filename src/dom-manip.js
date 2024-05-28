@@ -110,7 +110,15 @@ function renderProjectTodos(projectName = "Default") {
     const titleSpan = createSpan(todo.title);
     if (todo.done) titleSpan.classList.add("strike");
     const dueDateSpan = createSpan(format(todo.dueDate, "dd/MM/yyyy"));
-    const prioritySpan = createSpan(todo.priority);
+    let prioritySpan;
+
+    if (todo.priority === "low") {
+      prioritySpan = createSpan("❗️");
+    } else if (todo.priority === "medium") {
+      prioritySpan = createSpan("❗️❗️");
+    } else {
+      prioritySpan = createSpan("❗️❗️❗️");
+    }
 
     todoDiv.append(
       deleteButton,
