@@ -174,4 +174,47 @@ darkmodeToggleButton.addEventListener("click", () => {
     renderProjectTodos(todoDependencies.getCurrentProject());
   }
 });
+
+const dropDownBtn = document.querySelector(".drop-down-btn");
+dropDownBtn.value = "off";
+toggleSidebarBtn();
+
+function toggleSidebarBtn() {
+  if (dropDownBtn.value === "on") {
+    dropDownBtn.textContent = "▶️";
+    dropDownBtn.removeEventListener("click", hideSidebar);
+    dropDownBtn.addEventListener("click", showSidebar);
+    console.log(dropDownBtn.value);
+  } else {
+    dropDownBtn.textContent = "◀️";
+    dropDownBtn.removeEventListener("click", showSidebar);
+    dropDownBtn.addEventListener("click", hideSidebar);
+    console.log(dropDownBtn.value);
+  }
+}
+
+function hideSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  const content = document.querySelector(".content");
+  sidebar.classList.add("toggleVisibility");
+  content.classList.add("toggleVisibility");
+  const sidebarChildren = sidebar.children;
+  for (const child of sidebarChildren) {
+    child.classList.add("toggleVisibility");
+  }
+  dropDownBtn.value = "on";
+  toggleSidebarBtn();
+}
+
+function showSidebar() {
+  const sidebar = document.querySelector(".sidebar");
+  sidebar.classList.remove("toggleVisibility");
+  const sidebarChildren = sidebar.children;
+  for (const child of sidebarChildren) {
+    child.classList.remove("toggleVisibility");
+  }
+  dropDownBtn.value = "off";
+  toggleSidebarBtn();
+}
+
 export { renderProjects, renderProjectTodos, projectsLoad };

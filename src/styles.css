@@ -1,4 +1,8 @@
 /* General Styles */
+:root {
+  --main_grid_column: auto 1fr;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +22,7 @@ body {
 /* Content Layout */
 .content {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: var(--main_grid_column);
   width: 90%;
   max-width: 1200px;
   height: 90%;
@@ -38,6 +42,8 @@ body {
   align-items: center;
   gap: 2em;
   overflow-y: auto;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
 .user {
@@ -354,4 +360,32 @@ body.darkmode {
 }
 .due-by-container li:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+.sidebar.toggleVisibility {
+  width: 70px;
+  transition: all 0.2s ease;
+}
+.user.toggleVisibility {
+  display: none;
+}
+.due-by-container.toggleVisibility {
+  display: none;
+}
+.projects-container.toggleVisibility {
+  display: none;
+}
+.create-project-button-container.toggleVisibility {
+  display: none;
+}
+
+.drop-down-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #3498db;
+  color: white;
+  padding: 5px;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
 }
