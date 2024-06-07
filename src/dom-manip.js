@@ -108,7 +108,10 @@ function renderProjectTodos(projectName = "Default") {
     const deleteButton = createButton("todo-btn delete-todo-btn");
     const doneButton = createButton("todo-btn done-todo-btn");
     const titleSpan = createSpan(todo.title);
-    if (todo.done) titleSpan.classList.add("strike");
+    if (todo.done) {
+      titleSpan.classList.add("strike");
+      todoDiv.classList.add("todo-done");
+    }
     const dueDateSpan = createSpan(format(todo.dueDate, "dd/MM/yyyy"));
     let prioritySpan;
 

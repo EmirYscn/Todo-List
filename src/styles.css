@@ -146,6 +146,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .todo > span + span + span {
   text-align: end;
 }
@@ -324,6 +325,9 @@ body.darkmode {
 }
 .strike {
   text-decoration: line-through;
+}
+.todo-done {
+  opacity: 0.6;
 }
 .disable {
   display: none;
