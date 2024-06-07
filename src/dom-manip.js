@@ -181,12 +181,14 @@ toggleSidebarBtn();
 
 function toggleSidebarBtn() {
   if (dropDownBtn.value === "on") {
-    dropDownBtn.textContent = "▶️";
+    dropDownBtn.innerHTML = "&#9783;";
+    // dropDownBtn.textContent = "&#9783;";
     dropDownBtn.removeEventListener("click", hideSidebar);
     dropDownBtn.addEventListener("click", showSidebar);
     console.log(dropDownBtn.value);
   } else {
-    dropDownBtn.textContent = "◀️";
+    dropDownBtn.innerHTML = "&#9776;";
+    // dropDownBtn.textContent = "&#9776;";
     dropDownBtn.removeEventListener("click", showSidebar);
     dropDownBtn.addEventListener("click", hideSidebar);
     console.log(dropDownBtn.value);
